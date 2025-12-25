@@ -1,0 +1,25 @@
+/* Overrides */
+.pcr-app {
+    background: #252525 !important;
+    border-radius: 0px !important;
+    border: 1px solid #34495e;
+}
+
+.pcr-app .pcr-interaction input {
+    background-color: #424242 !important;
+    color: #ecf0f1 !important;
+    border-radius: 6px !important;
+}
+
+.pcr-palette {
+    border-radius: 50px !important;
+}
+
+.pcr-color-palette {
+    border-radius: 50px !important;
+}
+
+.pcr-app .pcr-interaction .pcr-save {
+    background: #666666 !important;
+    border-radius: 6px !important;
+}

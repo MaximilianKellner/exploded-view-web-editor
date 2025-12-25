@@ -1,5 +1,7 @@
 import Pickr from "@simonwep/pickr";
 
+import '@simonwep/pickr/dist/themes/nano.min.css';      // 'nano' theme
+
 const pickr = Pickr.create({
   el: ".color-picker",
   theme: "nano",
