@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@maximiliankellner/exploded-views": "^2.0.11"
+    "@maximiliankellner/exploded-views": "^2.0.12"
   },
   "devDependencies": {
     "vite": "^7.3.0"

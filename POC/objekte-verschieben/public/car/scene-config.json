@@ -1,21 +1,18 @@
 {
     "infoElementType": "card",
     "highlightOptions": {
-        "highlightComponent": true,
-        "mode": "wireframe"
+        "highlightComponent": false,
+        "mode": "ghost"
     },
     "pointerConfig": {
         "defaultSide": "auto"
     },
     "sceneConfig": {
-        "backgroundColor": "#2b2b2b",
-        "shadowsEnabled": false,
         "camera": {
-            "position": [2,1.5, 4],
-            "maxDistance": 50,
-            "lockVertical": false,
-            "lookAt": [0, 0, 0],
-            "minDistance": 3.5
+        "position": [3.5, 2, 5],
+        "lookAt": [0, 0, 0],
+        "minDistance": 3.5,
+        "maxDistance": 7
         },
         "lights": {
             "ambient": {
