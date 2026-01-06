@@ -1,0 +1,59 @@
+:root {
+            --bg-color: #1a1a1a;
+            --timeline-bg: #252525;
+            --scrubber-color: #4a90e2;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .timeline-container {
+            position: relative;
+            width: 800px;
+            height: 200px;
+            background-color: var(--timeline-bg);
+            border: 1px solid #333;
+            cursor: pointer;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Skala*/
+        .grid-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #333;
+        }
+
+        /* interaktive Nadel (Scrubber) */
+        #scrubber {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--scrubber-color);
+            pointer-events: none; /* Verhindert, dass die Nadel Maus-Events blockiert */
+            z-index: 10;
+        }
+
+        /* Kopf der Nadel */
+        #scrubber::before {
+            content: attr(data-percent);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--scrubber-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
