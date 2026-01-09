@@ -1,11 +1,5 @@
-:root {
-    --bg-color: #1a1a1a;
-    --timeline-bg: #252525;
-    --scrubber-color: #4a90e2;
-}
-
 body {
-    background-color: var(--bg-color);
+    background-color: var(--c-background);
     color: white;
     font-family: sans-serif;
     display: flex;

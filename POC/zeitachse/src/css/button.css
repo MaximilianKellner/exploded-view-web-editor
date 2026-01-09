@@ -1,0 +1,28 @@
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+button {
+    background-color: var(--c-button);
+    border-radius: var(--r-radius-button);
+    height: 24px;
+
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    &:hover {
+        background-color: var(--c-button-highlight);
+    }
+
+    img {
+        filter: invert(var(--invert-value));
+        width: 20px;
+        height: 20px;
+    }
+}

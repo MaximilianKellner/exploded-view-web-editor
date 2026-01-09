@@ -1,12 +1,75 @@
-
 .timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.top-bar {
+    background-color: var(--c-lightest);
+    border: 2px solid var(--c-border);
+    border-bottom: none;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border-radius: 7px 7px 0 0;
+
+    padding: 3px;
+
+    --top-bar-item-height: 24px;
+}
+
+.obj-timeline-container {
+    display: flex;
+}
+
+.anim-btn-group {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: var(--xxs);
+    margin: 0;
+}
+
+.time-control {
+    position: absolute;
+    right: 3px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+
+    height: var(--top-bar-item-height);
+
+    img {
+        background-color: var(--c-button);
+        border-radius:  var(--r-radius-button) 0 0 var(--r-radius-button);
+        padding: 4px;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    input {
+        height: 100%;
+        box-sizing: border-box;
+
+        background-color: var(--c-button);
+        border-radius:  0 var(--r-radius-button) var(--r-radius-button) 0;
+        color: var(--c-body-text);
+        border: none;
+        border-radius: 0 5px 5px 0;
+    }
+}
+
+/* ----------- timeline ----------- */
+.timeline {
     position: relative;
     width: 800px;
     height: 200px;
-    background-color: var(--timeline-bg);
+    background-color: var(--c-lighter);
     border: 1px solid #333;
     cursor: pointer;
-    overflow: hidden;
     user-select: none;
 }
 
@@ -25,7 +88,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background-color: var(--scrubber-color);
+    background-color: var(--c-accent-border);
     pointer-events: none; /* Verhindert, dass die Nadel Maus-Events blockiert */
     z-index: 10;
 }
@@ -37,7 +100,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--scrubber-color);
+    background-color: var(--c-accent-border);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 10px;

@@ -9,28 +9,43 @@
 </head>
 <body>
 
-  <div id="timeline-container">
+  <div class="timeline-container">
     
-    <div class="button-bar">
-        <div>
-          <button>Start</button>
-          <button>Play</button>
-          <button>End</button>
+    <div class="top-bar">
+        <div class="anim-btn-group">
+            <button>
+                <img src="./icon/start.svg" alt="start icon">
+            </button>
+            <button>
+                <img src="./icon/play.svg" alt="play icon">
+            </button>
+            <button>
+                <img src="./icon/end.svg" alt="end icon">
+            </button>
         </div>
-        <div>
-          <input type="number" id="timeline-width-input" value="800" min="10" style="width: 80px;">
+
+        <div class="time-control">
+            <img src="./icon/timer.svg" alt="timer icon">
+            <input type="number" id="timeline-width-input" value="800" min="10" style="width: 80px;">
+        </div>
     </div>
 
-    
+    <div class="obj-timeline-container">
+        <div class="object-list">
+            <div class="object-item" data-object-id="obj1">Objekt 1</div>
+            <div class="object-item" data-object-id="obj2">Objekt 2</div>
+            <div class="object-item" data-object-id="obj3">Objekt 3</div>
+        </div>
 
-    <div class="timeline-container" id="timeline">
-      <div class="grid-line" style="left: 0%;"></div>
-      <div class="grid-line" style="left: 25%;"></div>
-      <div class="grid-line" style="left: 50%;"></div>
-      <div class="grid-line" style="left: 75%;"></div>
-      <div class="grid-line" style="left: 100%;"></div>
+        <div class="timeline" id="timeline">
+            <div class="grid-line" style="left: 0%;"></div>
+            <div class="grid-line" style="left: 25%;"></div>
+            <div class="grid-line" style="left: 50%;"></div>
+            <div class="grid-line" style="left: 75%;"></div>
+            <div class="grid-line" style="left: 100%;"></div>
 
-      <div id="scrubber" style="left: 100px;" data-percent="0"></div>
+            <div id="scrubber" style="left: 0px;" data-percent="0"></div>
+        </div>
     </div>
   </div>
 
