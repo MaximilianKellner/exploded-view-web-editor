@@ -1,36 +1,54 @@
 const timeline = document.getElementById('timeline');
-        const scrubber = document.getElementById('scrubber');
+const scrubber = document.getElementById('scrubber');
 
-        function moveScrubber(e) {
-            const rect = timeline.getBoundingClientRect();
-            let x = e.clientX - rect.left; // Mausposition relativ zum Container
+function moveScrubber(e, snap = true) {
+    const rect = timeline.getBoundingClientRect();
+    let x = e.clientX - rect.left;
 
-            // Begrenzung (Boundary Check)
-            if (x < 0) x = 0;
-            if (x > rect.width) x = rect.width;
+    // Begrenzung
+    if (x < 0) x = 0;
+    if (x > rect.width) x = rect.width;
 
-            // Nadel bewegen
-            scrubber.style.left = x + 'px';
-            
-            // Optional: Berechnung des Prozentwerts oder Frames
-            const percent = (x / rect.width) * 100;
-            console.log(`Position: ${percent.toFixed(2)}%`);
+    // Prozent berechnen
+    let percent = (x / rect.width) * 100;
 
-            scrubber.setAttribute('data-percent', percent.toFixed(2) + '%');
-          }
+    // Beim Ziehen einrasten lassen
+    if (snap) {
+        percent = Math.round(percent);
+        x = (percent / 100) * rect.width; // X-Position auf feste Prozentwert setzen
+    }
 
-        // Event Listener für Klicken und Ziehen
-        let isDragging = false;
+    // Scrubber bewegen
+    scrubber.style.left = x + 'px';
+    scrubber.setAttribute('data-percent', percent);
+    console.log(`Position: ${percent}%`);
+}
 
-        timeline.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            moveScrubber(e);
-        });
+function getScrubberPosition() {
+    const percent = scrubber.getAttribute('data-percent');
+    console.log('Current Scrubber Position:', percent + '%');
+    return percent ? parseInt(percent) : 0;
+}
 
-        window.addEventListener('mousemove', (e) => {
-            if (isDragging) moveScrubber(e);
-        });
+// Event Listener für Klicken und Ziehen
+let isDragging = false;
 
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
+timeline.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    moveScrubber(e);
+});
+
+window.addEventListener('mousemove', (e) => {
+    if (isDragging) moveScrubber(e);
+});
+
+window.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+// AnimationAbspielen (snap = false):
+// x auf Basis der aktuellen Prozentposition setzen
+const rect = timeline.getBoundingClientRect();
+const percent = getScrubberPosition();
+const x = rect.left + (percent / 100) * rect.width;
+moveScrubber({ clientX: x }, false);
