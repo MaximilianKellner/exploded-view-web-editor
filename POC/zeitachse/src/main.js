@@ -46,6 +46,14 @@ window.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
+window.addEventListener('resize', () => {
+    // Scrubber-Position bei Fensteränderung beibehalten
+    const percent = getScrubberPosition();
+    const rect = timeline.getBoundingClientRect();
+    const x = (percent / 100) * rect.width;
+    scrubber.style.left = x + 'px';
+});
+
 // AnimationAbspielen (snap = false):
 // x auf Basis der aktuellen Prozentposition setzen
 const rect = timeline.getBoundingClientRect();
