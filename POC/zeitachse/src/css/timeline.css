@@ -153,10 +153,22 @@
 /* Skala*/
 .grid-line {
     position: absolute;
-    top: 0;
+    top: 20px;
     bottom: 0;
     width: 1px;
     background-color: #333;
+}
+
+.grid-line::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem; 
+    color: var(--c-body-text);
+    white-space: nowrap;
+    pointer-events: none;
 }
 
 /* interaktive Nadel (Scrubber) */
