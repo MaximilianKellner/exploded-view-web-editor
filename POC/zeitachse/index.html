@@ -26,32 +26,78 @@
 
         <div class="time-control">
             <img src="./icon/timer.svg" alt="timer icon">
-            <input type="number" id="timeline-width-input" value="800" min="10" style="width: 80px;">
+            <input type="text" id="timeline-width-input" value="800" style="width: 80px;">
         </div>
     </div>
 
     <div class="obj-timeline-container">
-        <div class="object-list">
-            <span><h2>Animierte Objekte</h2> <p id="object-count">(0/0)</p> </span>
-            <div class="object-item" data-object-id="obj1">Objekt 1</div>
-            <div class="object-item" data-object-id="obj2">Objekt 2</div>
-            <div class="object-item" data-object-id="obj3">Objekt 3</div>
-            <div class="object-item" data-object-id="obj4">Objekt 4</div>
-            <div class="object-item" data-object-id="obj4">Objekt 4</div>
-            <div class="object-item" data-object-id="obj4">Objekt 4</div>
-            <div class="object-item" data-object-id="obj4">Objekt 4</div>
-            <div class="object-item" data-object-id="obj4">Objekt 4</div>
-            <div class="object-item" data-object-id="obj4">Objekt 4</div>
+        <!-- Grid Header: Sticky -->
+        <div class="grid-header-left">
+            <h2>Animierte Objekte</h2>
+            <p id="object-count">(4/32)</p>
+        </div>
+        
+        <!-- Timeline Header: Sticky -->
+        <div class="grid-header-right">
+            <div class="timeline-header">
+                <div class="grid-line" style="left: 0%;" data-label="0%"></div>
+                <div class="grid-line" style="left: 25%;" data-label="25%"></div>
+                <div class="grid-line" style="left: 50%;" data-label="50%"></div>
+                <div class="grid-line" style="left: 75%;" data-label="75%"></div>
+                <div class="grid-line" style="left: 100%;" data-label="100%"></div>
+                <!-- Scrubber-Kopf im Header -->
+                <div id="scrubber-head" style="left: 6%;" data-percent="6%"></div>
+            </div>
         </div>
 
-        <div class="timeline" id="timeline">
-            <div class="grid-line" style="left: 0%;" data-label="0%"></div>
-            <div class="grid-line" style="left: 25%;" data-label="25%"></div>
-            <div class="grid-line" style="left: 50%;" data-label="50%"></div>
-            <div class="grid-line" style="left: 75%;" data-label="75%"></div>
-            <div class="grid-line" style="left: 100%;" data-label="100%"></div>
+        <!-- Scrollbarer Content-Bereich -->
+        <div class="grid-content-wrapper">
 
-            <div id="scrubber" style="left: 0px;" data-percent="0"></div>
+            <div class="objects-column">
+                <div class="object-item" data-object-id="obj1">Objekt 1</div>
+                <div class="object-item" data-object-id="obj2">Objekt 2</div>
+                <div class="object-item" data-object-id="obj3">Objekt 3</div>
+                <div class="object-item" data-object-id="obj4">Objekt 4</div>
+                <div class="object-item" data-object-id="obj5">Objekt 5</div>
+            </div>
+
+            <!-- Timeline Spalte mit Keyframes -->
+            <div class="timeline-column" id="timeline">
+                <!-- Grid-Lines -->
+                <div class="grid-line" style="left: 0%;" data-label=""></div>
+                <div class="grid-line" style="left: 25%;" data-label=""></div>
+                <div class="grid-line" style="left: 50%;" data-label=""></div>
+                <div class="grid-line" style="left: 75%;" data-label=""></div>
+                <div class="grid-line" style="left: 100%;" data-label=""></div>
+                
+                <!-- Scrubber-Linie (läuft durch Timeline) -->
+                <div id="scrubber" style="left: 6%;"></div>
+                
+                <div class="timeline-row-item" data-object-id="obj1">
+                    <div class="keyframe-bar" style="left: 75%; width: 25%;">
+                        <div class="keyframe-handle start" style="left: 0;"></div>
+                        <div class="keyframe-handle end" style="left: 100%;"></div>
+                    </div>
+                </div>
+                <div class="timeline-row-item" data-object-id="obj2">
+                    <div class="keyframe-bar" style="left: 50%; width: 25%;">
+                        <div class="keyframe-handle start" style="left: 0;"></div>
+                        <div class="keyframe-handle end" style="left: 100%;"></div>
+                    </div>
+                </div>
+                <div class="timeline-row-item" data-object-id="obj3">
+                    <div class="keyframe-bar" style="left: 5%; width: 35%;">
+                        <div class="keyframe-handle start" style="left: 0;"></div>
+                        <div class="keyframe-handle end" style="left: 100%;"></div>
+                    </div>
+                </div>
+                <div class="timeline-row-item" data-object-id="obj4"></div>
+                <div class="timeline-row-item" data-object-id="obj5"></div>
+                <div class="timeline-row-item" data-object-id="obj6"></div>
+                <div class="timeline-row-item" data-object-id="obj7"></div>
+                <div class="timeline-row-item" data-object-id="obj8"></div>
+                <div class="timeline-row-item" data-object-id="obj9"></div>
+            </div>
         </div>
     </div>
   </div>

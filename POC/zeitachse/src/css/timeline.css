@@ -71,138 +71,211 @@
 }
 
 .obj-timeline-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(150px, 250px) 1fr;
+    grid-template-rows: auto 1fr;
     width: 100%;
     height: 200px;
     background-color: var(--c-lighter);
-    overflow-y: auto;
+    overflow: hidden;
 }
 
-/* ----------- objekte ----------- */
-.object-list {
-    width: 25%;
-    max-width: 250px;
-    min-width: 0;
-    box-sizing: border-box;
-    padding: var(--s);
-    color: var(--c-body-text);
-    background-color: var(--c-lightest);
-    font-size: 1rem;
+/* ----------- Grid Header (Sticky) ----------- */
+.grid-header-left {
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
-    flex-direction: column;
-    gap: var(--s);
+    position: sticky;
+    top: 0;
+    gap: var(--xxs);
     align-items: flex-end;
-    
-    overflow: visible; 
-    height: auto; 
+    justify-content: end;
+    padding: var(--s);
+    background-color: var(--c-lightest);
+    border-right: 2px solid var(--c-border);
 
-    span{
-        display: flex;
-        gap : var(--xxs);
-        align-items: end;
-        
-        position: sticky;
-        top: 0;
-        z-index: 5;
-        background-color: var(--c-lightest);
-        padding-top: var(--s);
-        margin-top: calc(var(--s) * -1);
-        padding-bottom: 5px;
-
-        p {
-            white-space: nowrap;
-            margin-bottom: 2px;
-        }
-
-        h2 {
-            margin: 0;
-            color: var(--c-header);
-            text-align: right;
-            font-size: 1.1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        #object-count {
-            font-size: 0.8rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            color: var(--c-body-text);
-        }
-    }
-
-    .object-item {
+    h2 {
+        margin: 0;
+        color: var(--c-header);
+        font-size: 1.1rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        flex-shrink: 0;
-        min-height: 1.2em;
+    }
+
+    p {
+        white-space: nowrap;
+        margin: 0 0 2px 0;
+        font-size: 0.8rem;
+        color: var(--c-body-text);
     }
 }
 
-
-/* ----------- timeline ----------- */
-.timeline {
-    position: relative;
-    width: 100%;
-
-    min-width: 250px;
-
-    min-height: 100%;
+.grid-header-right {
+    grid-column: 2;
+    grid-row: 1;
     background-color: var(--c-lighter);
-    border: 1px solid #333;
-    cursor: pointer;
-    /*Text aiuswahl verbieten --> drag "doppelt" belegt*/
-    user-select: none;
-    margin: 0 32px;
+    position: sticky;
+    top: 0;
+
+    .timeline-header {
+        position: relative;
+        height: 100%;
+        margin: 0 var(--xxl);
+    }
 }
 
-/* Skala*/
+/* ----------- Scrollbarer Content Wrapper ----------- */
+.grid-content-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: minmax(150px, 250px) 1fr;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* ----------- Objektnamen Spalte ----------- */
+.objects-column {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--c-lightest);
+    padding: var(--s);
+    padding-top: 0;
+    gap: var(--s);
+    border-right: 2px solid var(--c-border);
+}
+
+.object-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--c-body-text);
+    font-size: 1rem;
+    min-height: var(--l);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+
+/* ----------- Timeline Spalte ----------- */
+.timeline-column {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--c-lighter);
+    margin: 0 var(--xxl);
+    gap: var(--s);
+    user-select: none;
+    position: relative;
+}
+
+.timeline-row-item {
+    position: relative;
+    min-height: var(--l);
+    width: 100%;
+    cursor: pointer;
+}
+
+/* ----------- Skala / Grid Lines ----------- */
 .grid-line {
     position: absolute;
-    top: 20px;
-    bottom: 0;
-    width: 1px;
+    top: 0;
     background-color: #333;
+    pointer-events: none;
+    white-space: nowrap;
+    width: 2px;
+    bottom: 0;
+
 }
 
-.grid-line::before {
+.timeline-header .grid-line {
+    height: 100%;
+    width: 2px;
+    top: 30px;
+}
+
+/* Label element*/
+.timeline-header .grid-line::before {
     content: attr(data-label);
     position: absolute;
-    top: -15px;
     left: 50%;
+    top: -15px; 
     transform: translateX(-50%);
     font-size: 0.75rem; 
     color: var(--c-body-text);
-    white-space: nowrap;
+}
+
+.timeline-column .grid-line::before {
+    display: none; /* Keine Labels im unteren Breich der Timeline-Column */
+}
+
+/* ----------- Scrubber ----------- */
+/* Scrubber-Kopf im Header */
+#scrubber-head {
+    position: absolute;
+    background-color: var(--c-accent-border);   
+    bottom: 0;
+    width: 2px;
+    height: 20px;
     pointer-events: none;
 }
 
-/* interaktive Nadel (Scrubber) */
+/* Label über dem Kopf */
+#scrubber-head::before {
+    content: attr(data-percent);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--c-accent-border);
+    color: #ffffff;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-bottom: -5px;
+}
+
+/* Scrubber-Linie durch den Content */
 #scrubber {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 2px;
     background-color: var(--c-accent-border);
-    pointer-events: none; /* Verhindert, dass die Nadel Maus-Events blockiert */
+    pointer-events: none;
     z-index: 10;
 }
 
-/* Kopf der Nadel */
-#scrubber::before {
-    content: attr(data-percent);
-    position: sticky;
-    display: block;
-    width: max-content;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--c-accent-border);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: bold;
+/* ----------- Keyframes ----------- */
+.keyframe-bar {
+    position: absolute;
+    height: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--c-orange);
+    border: 2px solid var(--c-orange-border);
+}
+
+.keyframe-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--c-orange);
+    border: 2px solid var(--c-orange-border);
+    cursor: grab;
+    z-index: 2;
+    border-radius: 2px;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.keyframe-handle:hover {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.3);
 }

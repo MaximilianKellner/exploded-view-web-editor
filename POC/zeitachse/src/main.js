@@ -1,11 +1,13 @@
-const timeline = document.getElementById('timeline');
+const timelineColumn = document.querySelector('.timeline-column');
+const timelineHeader = document.querySelector('.timeline-header');
 const scrubber = document.getElementById('scrubber');
+const scrubberHead = document.getElementById('scrubber-head');
 
 function moveScrubber(e, snap = true) {
-    const rect = timeline.getBoundingClientRect();
+    const rect = timelineHeader.getBoundingClientRect();
     let x = e.clientX - rect.left;
 
-    // Begrenzung
+    // Begrenzung auf 0-100%
     if (x < 0) x = 0;
     if (x > rect.width) x = rect.width;
 
@@ -15,13 +17,14 @@ function moveScrubber(e, snap = true) {
     // Beim Ziehen einrasten lassen
     if (snap) {
         percent = Math.round(percent);
-        x = (percent / 100) * rect.width; // X-Position auf feste Prozentwert setzen
     }
 
-    // Scrubber bewegen
-    scrubber.style.left = x + 'px';
-    scrubber.setAttribute('data-percent', percent);
-    console.log(`Position: ${percent}%`);
+    // Beide Scrubber-Teile synchron bewegen
+    const percentStr = Math.round(percent) + '%';
+    scrubber.style.left = percentStr;
+    scrubberHead.style.left = percentStr;
+    scrubberHead.setAttribute('data-percent', percentStr);
+    console.log(`Position: ${percentStr}`);
 }
 
 function getScrubberPosition() {
@@ -33,7 +36,13 @@ function getScrubberPosition() {
 // Event Listener für Klicken und Ziehen
 let isDragging = false;
 
-timeline.addEventListener('mousedown', (e) => {
+// Klickbereich: Timeline-Header und Timeline-Column
+timelineHeader.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    moveScrubber(e);
+});
+
+timelineColumn.addEventListener('mousedown', (e) => {
     isDragging = true;
     moveScrubber(e);
 });
@@ -46,17 +55,8 @@ window.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
-window.addEventListener('resize', () => {
-    // Scrubber-Position bei Fensteränderung beibehalten
-    const percent = getScrubberPosition();
-    const rect = timeline.getBoundingClientRect();
-    const x = (percent / 100) * rect.width;
-    scrubber.style.left = x + 'px';
-});
-
-// AnimationAbspielen (snap = false):
-// x auf Basis der aktuellen Prozentposition setzen
-const rect = timeline.getBoundingClientRect();
-const percent = getScrubberPosition();
-const x = rect.left + (percent / 100) * rect.width;
-moveScrubber({ clientX: x }, false);
+// Initial-Position setzen
+const currentPercent = parseInt(scrubberHead.getAttribute('data-percent')) || 6;
+const percentStr = currentPercent + '%';
+scrubber.style.left = percentStr;
+scrubberHead.style.left = percentStr;
