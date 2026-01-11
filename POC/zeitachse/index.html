@@ -26,7 +26,10 @@
 
         <div class="time-control">
             <img src="./icon/timer.svg" alt="timer icon">
-            <input type="text" id="timeline-width-input" value="800" style="width: 80px;">
+            <span>
+                <input type="number" id="time-input" value="8000" max="999999" min="1">
+                <span class="unit">ms</span>
+            </span>
         </div>
     </div>
 
@@ -58,7 +61,6 @@
                 <div class="object-item" data-object-id="obj2">Objekt 2</div>
                 <div class="object-item" data-object-id="obj3">Objekt 3</div>
                 <div class="object-item" data-object-id="obj4">Objekt 4</div>
-                <div class="object-item" data-object-id="obj5">Objekt 5</div>
             </div>
 
             <!-- Timeline Spalte mit Keyframes -->
@@ -91,12 +93,6 @@
                         <div class="keyframe-handle" style="left: 100%;"></div>
                     </div>
                 </div><div class="timeline-row-item" data-object-id="obj4">
-                    <div class="keyframe-bar" style="left: 5%; width: 35%;">
-                        <div class="keyframe-handle" style="left: 0;"></div>
-                        <div class="keyframe-handle" style="left: 100%;"></div>
-                    </div>
-                </div>
-                <div class="timeline-row-item" data-object-id="obj5">
                     <div class="keyframe-bar" style="left: 5%; width: 35%;">
                         <div class="keyframe-handle" style="left: 0;"></div>
                         <div class="keyframe-handle" style="left: 100%;"></div>
