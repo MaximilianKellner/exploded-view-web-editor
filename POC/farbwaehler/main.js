@@ -1,46 +1,53 @@
 import Pickr from "@simonwep/pickr";
 import '@simonwep/pickr/dist/themes/nano.min.css';
 
-const colorLabel = document.getElementById('color-label');
-const colorPreview = document.getElementById('color-preview');
+const triggers = document.querySelectorAll('.picker-trigger');
 
-const pickr = Pickr.create({
-  el: ".picker-trigger",
-  theme: "nano",
-  useAsButton: true,    // Erlaubt eigenes HTML als Button
-  default: "#1e1e1e",
+triggers.forEach(triggerEl => {
+    // Unterelemente relativ zum aktuellen Trigger
+    const previewBox = triggerEl.querySelector('.color-preview-box');
+    const hexLabel = triggerEl.querySelector('.color-hex-label');
+    const defaultColor = triggerEl.getAttribute('data-default') || '#333333';
 
-  components: {
-    preview: true,
-    opacity: false,
-    hue: true,
-    interaction: {
-      hex: true,
-      input: true,
-      save: false, // Für event doch wieder aktivieren?
-    },
-  },
-});
+    const pickr = Pickr.create({
+        el: triggerEl,
+        theme: "nano",
+        useAsButton: true,
+        default: defaultColor,
 
-// Funktion zum UI-Update
-function updateUI(color) {
-    const hex = color.toHEXA().toString();
-    colorLabel.textContent = hex;
-    colorPreview.style.backgroundColor = hex;
-}
+        components: {
+            preview: true,
+            opacity: false,
+            hue: true,
+            interaction: {
+                hex: true,
+                input: true,
+                save: false, // docch an für events?
+            },
+        },
+    });
 
-// Wenn sich die Farbe im Picker ändert (Live-Vorschau)
-pickr.on("change", (color) => {
-  updateUI(color);
-});
+    // Lokale Update-Funktion für diesen speziellen Picker
+    const updateUI = (color) => {
+        if (color) {
+            const hex = color.toHEXA().toString().toLowerCase();
+            hexLabel.textContent = hex;
+            previewBox.style.backgroundColor = hex;
+        }
+    };
 
-// Wenn gespeichert wird
-pickr.on("save", (color) => {
-  updateUI(color);
-  pickr.hide();
-});
+    // Events
+    pickr.on("change", (color) => {
+        updateUI(color);
+    });
 
-// Optional: Initial das UI setzen
-pickr.on('init', instance => {
-    updateUI(instance.getColor());
+    pickr.on("save", (color) => {
+        updateUI(color);
+        pickr.hide();
+    });
+
+    // Initialisierung für diesen Picker
+    pickr.on('init', instance => {
+        updateUI(instance.getColor());
+    });
 });
