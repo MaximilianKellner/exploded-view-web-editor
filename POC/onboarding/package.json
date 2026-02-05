@@ -11,6 +11,6 @@
     "vite": "^7.3.0"
   },
   "dependencies": {
-    "@maximiliankellner/exploded-views": "^2.0.12"
+    "@maximiliankellner/exploded-views": "^3.0.0"
   }
 }

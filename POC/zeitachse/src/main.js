@@ -61,7 +61,6 @@ const percentStr = currentPercent + '%';
 scrubber.style.left = percentStr;
 scrubberHead.style.left = percentStr;
 
-
 // --------------------------------------
 // --- Keyframe Handle Interaktivität ---
 

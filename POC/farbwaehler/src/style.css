@@ -21,7 +21,6 @@ html {
     height: 100%;
     background-color: #fdfd96; /* Startfarbe */
     border: 2px solid var(--c-border-light);
-
     border-radius: 5px 0 0 5px;
 }
 
@@ -52,7 +51,6 @@ html {
 
 /* Overrides */
 .pickr .pcr-button {
-    
     border: 2px solid var(--c-border-light);    
     border-radius: 5px 0 0 5px !important;
     overflow: hidden;
@@ -71,7 +69,6 @@ html {
     padding: var(--xxs);
 
     .pcr-selection {
-
         /* Vorschau Kreis*/
         .pcr-color-preview {
             margin: 0 !important;
@@ -97,7 +94,7 @@ html {
         /* Farbbereich */
         .pcr-palette {
             border-radius: 4px !important  ;
-            background-color: red !important;
+            border: 2px solid var(--c-border-light);
         }
 
         .pcr-palette::before {
