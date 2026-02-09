@@ -1,4 +1,5 @@
 import ExplodedViewer from '@maximiliankellner/exploded-views';
+import '@maximiliankellner/exploded-views/default-card-style.css';
 
 export async function startEditor(appContainer, modelUrl, configUrl) {
     // Init ExpViewer
