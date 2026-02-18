@@ -1,0 +1,45 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    networks:
+      - proxy-tier
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.exploded-views-https.rule=Host(`exploded-views-kellner.de-fender.it`)
+      - traefik.http.routers.exploded-views-https.entrypoints=websecure
+      - traefik.http.routers.exploded-views-https.tls.certresolver=myresolver
+      - traefik.docker.network=proxy-tier
+      - traefik.http.services.exploded-views-https.loadbalancer.server.port=80
+      - traefik.http.routers.exploded-views-http.rule=Host(`exploded-views-kellner.de-fender.it`)
+      - traefik.http.routers.exploded-views-http.entrypoints=web
+      - com.centurylinklabs.watchtower.enable=false
+      # Security headers
+      - traefik.http.middlewares.exploded-views-headers.headers.accesscontrolallowmethods=GET
+      - traefik.http.middlewares.exploded-views-headers.headers.accesscontrolallowheaders=*
+      - traefik.http.middlewares.exploded-views-headers.headers.accesscontrolalloworiginlist=https://exploded-views-kellner.de-fender.it
+      - traefik.http.middlewares.exploded-views-headers.headers.accesscontrolmaxage=100
+      - traefik.http.middlewares.exploded-views-headers.headers.addvaryheader=true
+      - traefik.http.middlewares.exploded-views-headers.headers.sslredirect=true
+      - traefik.http.middlewares.exploded-views-headers.headers.sslproxyheaders.X-Forwarded-Proto=https
+      - traefik.http.middlewares.exploded-views-headers.headers.stsseconds=31536000
+      - traefik.http.middlewares.exploded-views-headers.headers.forcestsheader=true
+      - traefik.http.middlewares.exploded-views-headers.headers.framedeny=true
+      - traefik.http.middlewares.exploded-views-headers.headers.contenttypenosniff=true
+      - traefik.http.middlewares.exploded-views-headers.headers.browserxssfilter=true
+      - traefik.http.middlewares.exploded-views-headers.headers.referrerpolicy=same-origin
+      - traefik.http.middlewares.exploded-views-headers.headers.customResponseHeaders.Server=""
+      - traefik.http.middlewares.exploded-views-headers.headers.permissionsPolicy=camera=none; geolocation=none; microphone=none; payment=none; usb=none; vr=none
+      - traefik.http.middlewares.exploded-views-headers.headers.contentsecuritypolicy=default-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; worker-src 'self' blob:;
+      # Static cache
+      - traefik.http.middlewares.exploded-views-cache.headers.customresponseheaders.Cache-Control=max-age=43200,public
+      # Apply middlewares
+      - traefik.http.routers.exploded-views-https.middlewares=exploded-views-headers,exploded-views-cache
+      - traefik.http.routers.exploded-views-http.middlewares=exploded-views-headers
+
+    restart: always
+
+networks:
+  proxy-tier:
+    external: true
