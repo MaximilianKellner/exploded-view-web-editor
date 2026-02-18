@@ -1,6 +1,7 @@
 const uploadOverlay = document.getElementById('onboarding-screen');
 const uploadBoxes = document.querySelectorAll('.upload-box');
 const closeBtns = document.querySelectorAll('.close-btn');
+const validationChipsContainer = document.getElementById('validation-chips');
 
 // Bilder vorladen
 const preloadImages = () => {
@@ -13,6 +14,7 @@ const preloadImages = () => {
 
 export function initUI(onFilesReceived, onReset, onValidate) {
     preloadImages();
+    clearValidationMessages();
 
     // Inputs zurücksetzen --> Cache Break
     document.querySelectorAll('input[type="file"]').forEach(input => {
@@ -35,10 +37,18 @@ export function initUI(onFilesReceived, onReset, onValidate) {
                 if (textSpan && !textSpan.dataset.originalText) textSpan.dataset.originalText = textSpan.textContent.trim();
 
                 // Format Überprüfung
-                let isValid = true;
+                let validationResult = { isValid: true, errors: [], warnings: [] };
                 if (onValidate) {
-                    isValid = await onValidate(file);
+                    const result = await onValidate(file);
+                    validationResult = normalizeValidationResult(result);
                 }
+
+                const isJsonFile = file.name.toLowerCase().endsWith('.json');
+                if (isJsonFile) {
+                    showValidationMessages(validationResult.errors, validationResult.warnings);
+                }
+
+                const isValid = validationResult.isValid;
 
                 if (isValid) {
                     // Erfolg anzeigen
@@ -120,6 +130,56 @@ function expandBox(activeBox) {
     });
 }
 
+function normalizeValidationResult(result) {
+    if (typeof result === 'boolean') {
+        return {
+            isValid: result,
+            errors: result ? [] : ['Ungültiges Dateiformat.'],
+            warnings: []
+        };
+    }
+
+    if (!result || typeof result !== 'object') {
+        return {
+            isValid: false,
+            errors: ['Unbekanntes Validierungsergebnis.'],
+            warnings: []
+        };
+    }
+
+    return {
+        isValid: Boolean(result.isValid),
+        errors: Array.isArray(result.errors) ? result.errors : [],
+        warnings: Array.isArray(result.warnings) ? result.warnings : []
+    };
+}
+
+function showValidationMessages(errors = [], warnings = []) {
+    if (!validationChipsContainer) return;
+
+    validationChipsContainer.innerHTML = '';
+
+    errors.forEach(message => {
+        validationChipsContainer.appendChild(createValidationChip(message, 'error'));
+    });
+
+    warnings.forEach(message => {
+        validationChipsContainer.appendChild(createValidationChip(message, 'warning'));
+    });
+}
+
+function createValidationChip(message, type) {
+    const chip = document.createElement('div');
+    chip.classList.add('validation-chip', type);
+    chip.textContent = message;
+    return chip;
+}
+
+function clearValidationMessages() {
+    if (!validationChipsContainer) return;
+    validationChipsContainer.innerHTML = '';
+}
+
 export function resetBoxes() {
     uploadBoxes.forEach(box => {
         box.classList.remove('expanded');
@@ -150,6 +210,8 @@ export function resetBoxes() {
             }
         });
     });
+
+    clearValidationMessages();
 }
 
 export function hideOverlay() {

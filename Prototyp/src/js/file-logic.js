@@ -12,39 +12,84 @@ export function getFilesFromList(files) {
     return { glbFile, jsonFile };
 }
 
+function createValidationResult(isValid, errors = [], warnings = []) {
+    return {
+        isValid,
+        errors,
+        warnings
+    };
+}
+
 // Exp-config Format Überprüfung
 export async function validateConfigFile(file) {
     try {
         const text = await file.text();
         const config = JSON.parse(text);
 
-        if (!config || typeof config !== 'object') return false;
-        if (!config.objects || typeof config.objects !== 'object') return false;
+        const errors = [];
+        const warnings = [];
+
+        if (!config || typeof config !== 'object' || Array.isArray(config)) {
+            return createValidationResult(false, ['Die Config muss ein JSON-Objekt sein.']);
+        }
+
+        if (!config.objects || typeof config.objects !== 'object' || Array.isArray(config.objects)) {
+            return createValidationResult(false, ['Die Config benötigt ein "objects"-Objekt.']);
+        }
 
         for (const key in config.objects) {
             const obj = config.objects[key];
-            if (typeof obj !== 'object') return false;
+            if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+                errors.push(`Objekt "${key}": Eintrag muss ein Objekt sein.`);
+                continue;
+            }
 
-            // level: number
-            if (typeof obj.level !== 'number') return false;
+            // level: number (optional)
+            if (Object.prototype.hasOwnProperty.call(obj, 'level') && typeof obj.level !== 'number') {
+                errors.push(`Objekt "${key}": "level" muss eine Zahl sein.`);
+            }
 
-            // expDirection: [x, y, z] (numbers)
-            if (!Array.isArray(obj.expDirection) || obj.expDirection.length !== 3) return false;
-            if (obj.expDirection.some(n => typeof n !== 'number')) return false;
+            // expDirection: [x, y, z] (numbers, optional per object)
+            if (Object.prototype.hasOwnProperty.call(obj, 'expDirection')) {
+                if (!Array.isArray(obj.expDirection) || obj.expDirection.length !== 3) {
+                    errors.push(`Objekt "${key}": "expDirection" muss ein Array mit 3 Zahlen sein.`);
+                } else if (obj.expDirection.some(n => typeof n !== 'number')) {
+                    errors.push(`Objekt "${key}": "expDirection" darf nur Zahlen enthalten.`);
+                }
+            }
+
+            // rotation: [x, y, z] (numbers, optional)
+            if (Object.prototype.hasOwnProperty.call(obj, 'rotation')) {
+                if (!Array.isArray(obj.rotation) || obj.rotation.length !== 3) {
+                    errors.push(`Objekt "${key}": "rotation" muss ein Array mit 3 Zahlen sein.`);
+                } else if (obj.rotation.some(n => typeof n !== 'number')) {
+                    errors.push(`Objekt "${key}": "rotation" darf nur Zahlen enthalten.`);
+                }
+            }
 
             // start: number
-            if (typeof obj.start !== 'number') return false;
+            if (typeof obj.start !== 'number') {
+                errors.push(`Objekt "${key}": "start" muss eine Zahl sein.`);
+            }
 
             // end: number
-            if (typeof obj.end !== 'number') return false;
+            if (typeof obj.end !== 'number') {
+                errors.push(`Objekt "${key}": "end" muss eine Zahl sein.`);
+            }
 
             // sequence: number (optional)
-            if (obj.hasOwnProperty('sequence') && typeof obj.sequence !== 'number') return false;
+            if (Object.prototype.hasOwnProperty.call(obj, 'sequence') && typeof obj.sequence !== 'number') {
+                errors.push(`Objekt "${key}": "sequence" muss eine Zahl sein.`);
+            }
+
+            if (Object.prototype.hasOwnProperty.call(obj, 'speedMultiplier')) {
+                warnings.push(`Objekt "${key}": Legacy-Feld "speedMultiplier" erkannt.`);
+            }
         }
 
-        return true;
+        return createValidationResult(errors.length === 0, errors, warnings);
     } catch (error) {
         console.error("Validation error:", error);
-        return false;
+        return createValidationResult(false, ['Ungültiges JSON-Format.']);
     }
 }

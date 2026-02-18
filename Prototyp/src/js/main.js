@@ -23,7 +23,7 @@ initUI(
         if (file.name.toLowerCase().endsWith('.json')) {
             return await validateConfigFile(file);
         }
-        return true;
+        return { isValid: true, errors: [], warnings: [] };
     }
 );
 
