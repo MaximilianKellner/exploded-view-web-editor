@@ -1,5 +1,6 @@
 stages:
   - deploy
+
 deploy:
   stage: deploy
   script:
@@ -10,4 +11,3 @@ deploy:
     - main
   tags:
     - prod-website
-
