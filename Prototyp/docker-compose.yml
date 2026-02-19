@@ -31,7 +31,7 @@ services:
       - traefik.http.middlewares.exploded-views-headers.headers.referrerpolicy=same-origin
       - traefik.http.middlewares.exploded-views-headers.headers.customResponseHeaders.Server=""
       - traefik.http.middlewares.exploded-views-headers.headers.permissionsPolicy=camera=none; geolocation=none; microphone=none; payment=none; usb=none; vr=none
-      - traefik.http.middlewares.exploded-views-headers.headers.contentsecuritypolicy=default-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; worker-src 'self' blob:;
+      - traefik.http.middlewares.exploded-views-headers.headers.contentsecuritypolicy=default-src 'none'; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' blob: data:; worker-src 'self' blob:;
       # Static cache
       - traefik.http.middlewares.exploded-views-cache.headers.customresponseheaders.Cache-Control=max-age=43200,public
       # Apply middlewares
