@@ -180,6 +180,10 @@ function clearValidationMessages() {
     validationChipsContainer.innerHTML = '';
 }
 
+export function showValidationError(message) {
+    showValidationMessages([message], []);
+}
+
 export function resetBoxes() {
     uploadBoxes.forEach(box => {
         box.classList.remove('expanded');

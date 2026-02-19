@@ -1,4 +1,4 @@
-import { initUI, hideOverlay } from './onboarding-ui-handler.js';
+import { initUI, hideOverlay, showValidationError } from './onboarding-ui-handler.js';
 import { getFilesFromList, validateConfigFile } from './file-logic.js';
 import { startEditor } from './editor-logic.js';
 
@@ -38,9 +38,13 @@ async function handleFiles(files) {
     if (glbFile) {
         modelUrl = URL.createObjectURL(glbFile);
         
-        // Start editor and update UI
-        startEditor(appContainer, modelUrl, configUrl);
-        hideOverlay();
+        try {
+            await startEditor(appContainer, modelUrl, configUrl, glbFile, jsonFile);
+            hideOverlay();
+        } catch (error) {
+            console.error('Fehler beim Laden des Modells oder Initialisieren der Animation:', error);
+            showValidationError('Modell/Animation konnte nicht geladen werden. Bitte Dateien prüfen oder erneut versuchen.');
+        }
         
     } else if (jsonFile) {
         console.log('Config loaded, waiting for GLB...');
