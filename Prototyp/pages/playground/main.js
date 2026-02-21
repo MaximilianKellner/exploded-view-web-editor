@@ -10,10 +10,10 @@ if (!container) {
 }
 
 const options = {
-        modelPath: '/playground-demo/911-with-ground.glb',
-        sceneConfigPath: '/playground-demo/scene-config.json',
-        explosionConfigPath: '/playground-demo/exp-config.json',
-        cardDataPath: '/playground-demo/cards.json',
+        modelPath: '/playground-assets/911-with-ground.glb',
+        sceneConfigPath: '/playground-assets/scene-config.json',
+        explosionConfigPath: '/playground-assets/exp-config.json',
+        cardDataPath: '/playground-assets/cards.json',
         editMode: true, // Aktiviert den visuellen Editor zur Konfiguration
         showStats: true,
         showDebugUI: false,
