@@ -14,8 +14,9 @@ const options = {
         sceneConfigPath: '/playground-demo/scene-config.json',
         explosionConfigPath: '/playground-demo/exp-config.json',
         cardDataPath: '/playground-demo/cards.json',
-        editMode: true,
-        showStats: false,
+        editMode: true, // Aktiviert den visuellen Editor zur Konfiguration
+        showStats: true,
+        showDebugUI: false,
 };
 
 const viewer = new ExplodedViewer(container, options);
