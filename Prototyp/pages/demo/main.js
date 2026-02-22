@@ -36,8 +36,8 @@ const scenes = [
     explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-f40.json",
   },
   {
-    modelPath: "/demo-page-assets/cars/aventador.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-aventador.json",
+    modelPath: "/demo-page-assets/cars/aventador-neuneu.glb",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-aventador-neu.json",
     explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-aventador.json",
   },
   {
