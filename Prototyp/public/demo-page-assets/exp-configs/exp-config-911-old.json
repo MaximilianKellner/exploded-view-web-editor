@@ -1,0 +1,65 @@
+{
+  "_comment": "Vektoren und andere Wertepaare werden in der Reihenfolge [X, Y, Z] angegeben.",
+  "objects": {
+    "911-FL": {
+      "level": 2,
+      "expDirection": [
+        1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 0.5
+    },
+    "911-RL": {
+      "level": 2,
+      "expDirection": [
+        1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "911-FR": {
+      "level": 2,
+      "expDirection": [
+        -1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 0.5
+    },
+    "911-RR": {
+      "level": 2,
+      "expDirection": [
+        -1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    }
+  }
+}

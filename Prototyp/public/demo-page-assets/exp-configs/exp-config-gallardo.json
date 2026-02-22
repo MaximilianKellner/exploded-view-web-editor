@@ -1,0 +1,80 @@
+{
+  "_comment": "Vektoren und andere Wertepaare werden in der Reihenfolge [X, Y, Z] angegeben.",
+  "objects": {
+    "Wheel_FL": {
+      "level": 2,
+      "expDirection": [
+        1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "Wheel_RL": {
+      "level": 2,
+      "expDirection": [
+        1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "Wheel_FR": {
+      "level": 2,
+      "expDirection": [
+        -1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "Wheel_RR": {
+      "level": 2,
+      "expDirection": [
+        -1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "lambo-body": {
+      "level": 0,
+      "expDirection": [
+        0,
+        1,
+        0
+      ],
+      "rotation": [
+        0,
+        360,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    }
+  }
+}

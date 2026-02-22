@@ -32,33 +32,33 @@ const sharedOptions = {
 const scenes = [
   {
     modelPath: "/demo-page-assets/cars/f40.glb",
-    sceneConfigPath: "/demo-page-assets/scene-config.json",
-    explosionConfigPath: "/playground-assets/exp-config.json",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-f40.json",
+    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-f40.json",
   },
   {
     modelPath: "/demo-page-assets/cars/aventador.glb",
-    sceneConfigPath: "/playground-assets/scene-config.json",
-    explosionConfigPath: "/playground-assets/exp-config.json",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-aventador.json",
+    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-aventador.json",
   },
   {
     modelPath: "/demo-page-assets/cars/r8-neu.glb",
-    sceneConfigPath: "/playground-assets/scene-config.json",
-    explosionConfigPath: "/playground-assets/exp-config.json",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-r8.json",
+    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-r8.json",
   },
   {
     modelPath: "/demo-page-assets/cars/911.glb",
-    sceneConfigPath: "/demo-page-assets/scene-config.json",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-911.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },
   {
     modelPath: "/demo-page-assets/cars/gallardo.glb",
-    sceneConfigPath: "/demo-page-assets/scene-config.json",
-    explosionConfigPath: "/playground-assets/exp-config.json",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-gallardo.json",
+    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-gallardo.json",
   },
   {
     modelPath: "/demo-page-assets/cars/911-old.glb",
-    sceneConfigPath: "/playground-assets/scene-config.json",
-    explosionConfigPath: "/playground-assets/exp-config.json",
+    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-911-old.json",
+    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-911-old.json",
   },
 ];
 

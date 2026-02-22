@@ -1,0 +1,30 @@
+{
+  "animationConfig": {
+    "expFactor": 0,
+    "layerDistance": 0.5,
+    "animationDuration": 2000,
+    "animationEasing": "inOut(4)",
+    "globalExpDirection": [
+      1,
+      1,
+      1
+    ],
+    "allowScrollAnimation": true,
+    "scrollSensitivity": 0.001
+  },
+  "sceneConfig": {
+    "backgroundColor": "#c45390",
+    "camera": {
+      "position": [
+        3,
+        1.5,
+        3
+      ],
+      "lookAt": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}

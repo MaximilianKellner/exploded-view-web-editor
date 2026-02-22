@@ -1,0 +1,80 @@
+{
+  "_comment": "Vektoren und andere Wertepaare werden in der Reihenfolge [X, Y, Z] angegeben.",
+  "objects": {
+    "f40-wheel-FL": {
+      "level": 2,
+      "expDirection": [
+        1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "f40-wheel-FR": {
+      "level": 2,
+      "expDirection": [
+        -1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    },
+    "f40-wheel-RL": {
+      "level": 2,
+      "expDirection": [
+        1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 0.75
+    },
+    "f40-wheel-RR": {
+      "level": 2.28,
+      "expDirection": [
+        -1,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 0.75
+    },
+    "F40-export-main": {
+      "level": 0,
+      "expDirection": [
+        0,
+        1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": 0,
+      "end": 1
+    }
+  }
+}
