@@ -97,7 +97,6 @@ h2 {
 
 #playBothBtn {
     font-family: "Jersey 10", sans-serif;
-    margin: 1rem 0;
     padding: 0.5rem 1rem;
     font-size: 1.75rem;
     font-weight: bold;
@@ -118,4 +117,112 @@ img {
     display: flex;
     height: auto;
     margin: 0 auto;
+}
+
+
+/* Viewer Section */
+
+.viewer-section {
+    width: min(1200px, 92vw);
+    margin: 0 auto;
+}
+
+.viewer-carousel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.viewer-stage {
+    width: 100%;
+}
+
+.explo-viewer {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 360px;
+    background: #101010;
+}
+
+.scene-nav-btn {
+    font-family: "Jersey 10", sans-serif;
+    width: 4rem;
+    height: 4rem;
+    font-size: 4rem;
+    background: transparent;
+    color: var(--title-fill);
+    cursor: pointer;
+}
+
+.scene-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.viewer-controls {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+#progressSlider {
+    width: min(420px, 40vw);
+}
+
+#resetBtn {
+    width: 47px;
+    height: 47px;
+    background-color: var(--title-fill);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 25px;
+    }
+}
+
+.scene-preview-bar {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.scene-preview {
+    padding: 0;
+    cursor: pointer;
+    min-height: 84px;
+    overflow: hidden;
+    opacity: 0.6;
+   
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &.is-active {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 900px) {
+    .viewer-carousel {
+        grid-template-columns: 1fr;
+    }
+
+    .scene-nav-btn {
+        width: 100%;
+        height: 2.75rem;
+    }
+
+    .scene-preview-bar {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
