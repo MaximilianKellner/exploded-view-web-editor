@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         main: './index.html',
         playground: './pages/playground/index.html',
+        demo: './pages/demo/index.html',
       }
     }
   }

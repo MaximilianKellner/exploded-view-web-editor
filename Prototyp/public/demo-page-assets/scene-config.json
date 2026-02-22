@@ -1,0 +1,101 @@
+{
+  "infoElementType": "card",
+  "animationConfig": {
+    "expFactor": 0,
+    "useSequenceAnim": false,
+    "layerDistance": 0.5,
+    "animationDuration": 2000,
+    "animationEasing": "inOut(4)",
+    "globalExpDirection": [
+      1,
+      1,
+      1
+    ],
+    "allowScrollAnimation": false,
+    "scrollSensitivity": 0.001
+  },
+  "cardConfig": {
+    "animationDuration": 500,
+    "isDarkmode": true
+  },
+  "highlightOptions": {
+    "highlightComponent": true,
+    "mode": "ghost",
+    "wireframeColor": "#AAAAAA",
+    "ghostColor": "#C4C4C4"
+  },
+  "pointerConfig": {
+    "defaultSide": "auto",
+    "rotationY": "0",
+    "maxWidth": 1800,
+    "titleColor": "#FFFFFF",
+    "bodyColor": "#999999",
+    "lineColor": "#EBEBEB"
+  },
+  "sceneConfig": {
+    "backgroundColor": "#000000",
+    "showCoordinatesystem": false,
+    "shadowsEnabled": false,
+    "camera": {
+      "position": [
+        5,
+        3,
+        5
+      ],
+      "lookAt": [
+        0,
+        0,
+        0
+      ],
+      "minDistance": 1,
+      "maxDistance": 20,
+      "lockHorizontal": false,
+      "lockVertical": false,
+      "zoomSpeed": 1.5,
+      "rotateSpeed": 1.1,
+      "dampingFactor": 0.075
+    },
+    "lights": {
+      "ambient": {
+        "type": "ambient",
+        "enabled": true,
+        "color": "#ffffff",
+        "intensity": 0.5
+      },
+      "mainDirectional": {
+        "type": "directional",
+        "enabled": true,
+        "color": "#FFFFFF",
+        "intensity": 1.5,
+        "position": {
+          "x": 5,
+          "y": 10,
+          "z": 7.5
+        },
+        "lookAtEnabled": true,
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      "secondDirectional": {
+        "type": "directional",
+        "enabled": true,
+        "color": "#FFFFFF",
+        "intensity": 1,
+        "position": {
+          "x": -5,
+          "y": 10,
+          "z": -5
+        },
+        "lookAtEnabled": true,
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    }
+  }
+}
