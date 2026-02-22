@@ -6,6 +6,21 @@ const appContainer = document.getElementById('app-container');
 
 let modelUrl = null;
 let configUrl = null;
+let sceneConfigUrl = null;
+
+function revokeObjectUrl(url) {
+    if (!url) return;
+    URL.revokeObjectURL(url);
+}
+
+function resetObjectUrls() {
+    revokeObjectUrl(modelUrl);
+    revokeObjectUrl(configUrl);
+    revokeObjectUrl(sceneConfigUrl);
+    modelUrl = null;
+    configUrl = null;
+    sceneConfigUrl = null;
+}
 
 // UI mit callbacks initialisieren
 initUI(
@@ -15,12 +30,11 @@ initUI(
     },
     // onReset
     () => {
-        modelUrl = null;
-        configUrl = null;
+        resetObjectUrls();
     },
     // onValidate
-    async (file) => {
-        if (file.name.toLowerCase().endsWith('.json')) {
+    async (file, fileRole) => {
+        if (fileRole === 'expConfig') {
             return await validateConfigFile(file);
         }
         return { isValid: true, errors: [], warnings: [] };
@@ -28,25 +42,31 @@ initUI(
 );
 
 async function handleFiles(files) {
-    const { glbFile, jsonFile } = getFilesFromList(files);
+    const { glbFile, expConfigFile, sceneConfigFile } = getFilesFromList(files);
 
-    if (jsonFile) {
-        // überprüfung bereits beim upload
-        configUrl = URL.createObjectURL(jsonFile);
+    if (expConfigFile) {
+        revokeObjectUrl(configUrl);
+        configUrl = URL.createObjectURL(expConfigFile);
+    }
+
+    if (sceneConfigFile) {
+        revokeObjectUrl(sceneConfigUrl);
+        sceneConfigUrl = URL.createObjectURL(sceneConfigFile);
     }
 
     if (glbFile) {
+        revokeObjectUrl(modelUrl);
         modelUrl = URL.createObjectURL(glbFile);
         
         try {
-            await startEditor(appContainer, modelUrl, configUrl, glbFile, jsonFile);
+            await startEditor(appContainer, modelUrl, configUrl, sceneConfigUrl, glbFile, expConfigFile, sceneConfigFile);
             hideOverlay();
         } catch (error) {
             console.error('Fehler beim Laden des Modells oder Initialisieren der Animation:', error);
             showValidationError('Modell/Animation konnte nicht geladen werden. Bitte Dateien prüfen oder erneut versuchen.');
         }
         
-    } else if (jsonFile) {
-        console.log('Config loaded, waiting for GLB...');
+    } else if (expConfigFile || sceneConfigFile) {
+        console.log('Config geladen, warte auf GLB...');
     }
 }

@@ -1,15 +1,46 @@
 export function getFilesFromList(files) {
     let glbFile = null;
-    let jsonFile = null;
+    let expConfigFile = null;
+    let sceneConfigFile = null;
 
-    for (const file of files) {
-        if (file.name.toLowerCase().endsWith('.glb')) {
+    for (const entry of files) {
+        const hasWrappedFile = entry && typeof entry === 'object' && Object.prototype.hasOwnProperty.call(entry, 'file');
+        const file = hasWrappedFile ? entry.file : entry;
+        const role = hasWrappedFile ? entry.role : null;
+
+        if (!file) {
+            continue;
+        }
+
+        if (role === 'model') {
             glbFile = file;
-        } else if (file.name.toLowerCase().endsWith('.json')) {
-            jsonFile = file;
+            continue;
+        }
+
+        if (role === 'expConfig') {
+            expConfigFile = file;
+            continue;
+        }
+
+        if (role === 'sceneConfig') {
+            sceneConfigFile = file;
+            continue;
+        }
+
+        const fileName = String(file.name || '').toLowerCase();
+
+        if (fileName.endsWith('.glb')) {
+            glbFile = file;
+        } else if (fileName.endsWith('.json')) {
+            if (!expConfigFile) {
+                expConfigFile = file;
+            } else {
+                sceneConfigFile = file;
+            }
         }
     }
-    return { glbFile, jsonFile };
+
+    return { glbFile, expConfigFile, sceneConfigFile };
 }
 
 function createValidationResult(isValid, errors = [], warnings = []) {

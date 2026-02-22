@@ -12,6 +12,26 @@ const preloadImages = () => {
     });
 };
 
+function getFileRoleFromInput(input) {
+    if (!input || !input.classList) {
+        return 'unknown';
+    }
+
+    if (input.classList.contains('file-input-glb')) {
+        return 'model';
+    }
+
+    if (input.classList.contains('file-input-exp-json')) {
+        return 'expConfig';
+    }
+
+    if (input.classList.contains('file-input-scene-json')) {
+        return 'sceneConfig';
+    }
+
+    return 'unknown';
+}
+
 export function initUI(onFilesReceived, onReset, onValidate) {
     preloadImages();
     clearValidationMessages();
@@ -26,6 +46,7 @@ export function initUI(onFilesReceived, onReset, onValidate) {
         input.addEventListener('change', async (e) => {
             if (e.target.files.length > 0) {
                 const file = e.target.files[0];
+                const fileRole = getFileRoleFromInput(e.target);
                 const box = e.target.closest('.upload-box');
                 const btn = e.target.closest('.file-upload-btn');
                 const icon = btn.querySelector('.file-upload-icon');
@@ -39,12 +60,11 @@ export function initUI(onFilesReceived, onReset, onValidate) {
                 // Format Überprüfung
                 let validationResult = { isValid: true, errors: [], warnings: [] };
                 if (onValidate) {
-                    const result = await onValidate(file);
+                    const result = await onValidate(file, fileRole);
                     validationResult = normalizeValidationResult(result);
                 }
 
-                const isJsonFile = file.name.toLowerCase().endsWith('.json');
-                if (isJsonFile) {
+                if (fileRole === 'expConfig') {
                     showValidationMessages(validationResult.errors, validationResult.warnings);
                 }
 
@@ -67,15 +87,24 @@ export function initUI(onFilesReceived, onReset, onValidate) {
                     const collectedFiles = [];
 
                     allInputs.forEach(inp => {
-                        if (inp.files.length === 0) {
+                        const inputRole = getFileRoleFromInput(inp);
+                        const isRequiredInput = inputRole !== 'sceneConfig';
+
+                        if (isRequiredInput && inp.files.length === 0) {
                             allFilled = false;
                         } else {
                             const inpBtn = inp.closest('.file-upload-btn');
                             const inpIcon = inpBtn.querySelector('.file-upload-icon');
-                            if (inpIcon.classList.contains('error')) {
+                            if (isRequiredInput && inpIcon.classList.contains('error')) {
                                 allFilled = false; 
                             }
-                            collectedFiles.push(inp.files[0]);
+
+                            if (inp.files.length > 0) {
+                                collectedFiles.push({
+                                    file: inp.files[0],
+                                    role: inputRole
+                                });
+                            }
                         }
                     });
 
@@ -103,7 +132,7 @@ export function initUI(onFilesReceived, onReset, onValidate) {
 
     // Listeners für upload Boxen
     uploadBoxes.forEach(box => {
-        box.addEventListener('click', (e) => {
+        box.addEventListener('click', () => {
             expandBox(box);
         });
     });
