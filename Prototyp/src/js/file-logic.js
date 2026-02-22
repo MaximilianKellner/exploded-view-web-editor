@@ -67,13 +67,13 @@ export async function validateConfigFile(file) {
                 }
             }
 
-            // start: number
-            if (typeof obj.start !== 'number') {
+            // start: number (optional)
+            if (Object.prototype.hasOwnProperty.call(obj, 'start') && typeof obj.start !== 'number') {
                 errors.push(`Objekt "${key}": "start" muss eine Zahl sein.`);
             }
 
-            // end: number
-            if (typeof obj.end !== 'number') {
+            // end: number (optional)
+            if (Object.prototype.hasOwnProperty.call(obj, 'end') && typeof obj.end !== 'number') {
                 errors.push(`Objekt "${key}": "end" muss eine Zahl sein.`);
             }
 

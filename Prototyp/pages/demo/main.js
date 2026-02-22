@@ -31,32 +31,32 @@ const sharedOptions = {
 // 6 auswählbare Szenen für den Viewer
 const scenes = [
   {
-    modelPath: "/playground-assets/911-with-ground.glb",
+    modelPath: "/demo-page-assets/cars/f40.glb",
     sceneConfigPath: "/demo-page-assets/scene-config.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },
   {
-    modelPath: "/playground-assets/911.glb",
+    modelPath: "/demo-page-assets/cars/aventador.glb",
     sceneConfigPath: "/playground-assets/scene-config.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },
   {
-    modelPath: "/playground-assets/911-with-ground.glb",
+    modelPath: "/demo-page-assets/cars/r8-neu.glb",
     sceneConfigPath: "/playground-assets/scene-config.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },
   {
-    modelPath: "/playground-assets/911.glb",
+    modelPath: "/demo-page-assets/cars/911.glb",
     sceneConfigPath: "/demo-page-assets/scene-config.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },
   {
-    modelPath: "/playground-assets/911-with-ground.glb",
+    modelPath: "/demo-page-assets/cars/gallardo.glb",
     sceneConfigPath: "/demo-page-assets/scene-config.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },
   {
-    modelPath: "/playground-assets/911.glb",
+    modelPath: "/demo-page-assets/cars/911-old.glb",
     sceneConfigPath: "/playground-assets/scene-config.json",
     explosionConfigPath: "/playground-assets/exp-config.json",
   },

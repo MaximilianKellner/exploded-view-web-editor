@@ -15,7 +15,6 @@ function createViewerOptions(modelUrl, configUrl) {
             }
         },
         animationConfig: {
-            layerDistance: 1,
             globalExpDirection: [0, 1, 0]
         }
     };
