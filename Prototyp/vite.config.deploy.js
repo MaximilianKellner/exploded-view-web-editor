@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: '/exploded-view-web-editor/',
   server: {
     host: true // Erlaubt den Zugriff aus dem lokalen Netzwerk
   },

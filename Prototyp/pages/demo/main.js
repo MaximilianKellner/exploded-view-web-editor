@@ -28,37 +28,39 @@ const sharedOptions = {
     showDebugUI: false,
 };
 
+const withBaseUrl = (path) => new URL(path, window.location.origin + import.meta.env.BASE_URL).toString();
+
 // 6 auswählbare Szenen für den Viewer
 const scenes = [
   {
-    modelPath: "/demo-page-assets/cars/f40.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-f40.json",
-    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-f40.json",
+        modelPath: withBaseUrl("demo-page-assets/cars/f40.glb"),
+        sceneConfigPath: withBaseUrl("demo-page-assets/scene-configs/scene-config-f40.json"),
+        explosionConfigPath: withBaseUrl("demo-page-assets/exp-configs/exp-config-f40.json"),
   },
   {
-    modelPath: "/demo-page-assets/cars/aventador-neuneu.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-aventador-neuneu.json",
-    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-aventador-neuneu.json",
+        modelPath: withBaseUrl("demo-page-assets/cars/aventador-neuneu.glb"),
+        sceneConfigPath: withBaseUrl("demo-page-assets/scene-configs/scene-config-aventador-neuneu.json"),
+        explosionConfigPath: withBaseUrl("demo-page-assets/exp-configs/exp-config-aventador-neuneu.json"),
   },
   {
-    modelPath: "/demo-page-assets/cars/r8-neu.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-r8.json",
-    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-r8.json",
+        modelPath: withBaseUrl("demo-page-assets/cars/r8-neu.glb"),
+        sceneConfigPath: withBaseUrl("demo-page-assets/scene-configs/scene-config-r8.json"),
+        explosionConfigPath: withBaseUrl("demo-page-assets/exp-configs/exp-config-r8.json"),
   },
   {
-    modelPath: "/demo-page-assets/cars/911.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-911.json",
-    explosionConfigPath: "/playground-assets/exp-config.json",
+        modelPath: withBaseUrl("demo-page-assets/cars/911.glb"),
+        sceneConfigPath: withBaseUrl("demo-page-assets/scene-configs/scene-config-911.json"),
+        explosionConfigPath: withBaseUrl("playground-assets/exp-config.json"),
   },
   {
-    modelPath: "/demo-page-assets/cars/gallardo.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-gallardo.json",
-    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-gallardo.json",
+        modelPath: withBaseUrl("demo-page-assets/cars/gallardo.glb"),
+        sceneConfigPath: withBaseUrl("demo-page-assets/scene-configs/scene-config-gallardo.json"),
+        explosionConfigPath: withBaseUrl("demo-page-assets/exp-configs/exp-config-gallardo.json"),
   },
   {
-    modelPath: "/demo-page-assets/cars/911-old.glb",
-    sceneConfigPath: "/demo-page-assets/scene-configs/scene-config-911-old.json",
-    explosionConfigPath: "/demo-page-assets/exp-configs/exp-config-911-old.json",
+        modelPath: withBaseUrl("demo-page-assets/cars/911-old.glb"),
+        sceneConfigPath: withBaseUrl("demo-page-assets/scene-configs/scene-config-911-old.json"),
+        explosionConfigPath: withBaseUrl("demo-page-assets/exp-configs/exp-config-911-old.json"),
   },
 ];
 
